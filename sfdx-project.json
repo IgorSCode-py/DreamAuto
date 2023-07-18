@@ -2,11 +2,19 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true
+      "default": true,
+      "package": "DreamAuto",
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "versionDescription": "DreamAutoApp"
     }
   ],
   "name": "DreamAuto",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "57.0"
+  "sourceApiVersion": "57.0",
+  "packageAliases": {
+    "DreamAuto": "0Ho7Q000000PB5HSAW",
+    "DreamAuto@0.1.0-1": "04t7Q0000009vw4QAA"
+  }
 }
