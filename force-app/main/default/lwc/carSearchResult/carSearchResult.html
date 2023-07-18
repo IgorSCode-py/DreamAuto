@@ -1,0 +1,28 @@
+<template>
+    <lightning-tabset variant="scoped">
+      <lightning-tab label="Gallery">
+        <template if:true={cars}>
+          <div class="slds-scrollable_y">
+            <lightning-layout horizontal-align="center" multiple-rows>
+              <!--  looping through each car -->
+              <template for:each={cars} for:item="car">
+                <lightning-layout-item key={car.Id} 
+                                      padding="around-small" 
+                                      size="12" 
+                                      small-device-size="6"
+                                      medium-device-size="4"
+                                      large-device-size="3">
+                   <!-- car tile --> 
+                  <c-car-tile car={car} selected-car-id={selectedCarId} oncarselect={updateSelectedTile}></c-car-tile>
+                </lightning-layout-item>
+              </template>
+            </lightning-layout>
+          </div>
+        </template>
+      </lightning-tab>
+      <lightning-tab label="Cars Near Me">
+          <!-- carsNearMe component goes here 
+          <c-cars-near-me car-type-id={carTypeId}></c-cars-near-me>-->
+      </lightning-tab>
+    </lightning-tabset>
+  </template>
