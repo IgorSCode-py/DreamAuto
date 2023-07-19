@@ -1,0 +1,18 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Car_Type__c",
+                "referenceId": "Car_Type__cRef1"
+            },
+            "Name": "Luxury"
+        },
+        {
+            "attributes": {
+                "type": "Car_Type__c",
+                "referenceId": "Car_Type__cRef2"
+            },
+            "Name": "Sports"
+        }
+    ]
+}
