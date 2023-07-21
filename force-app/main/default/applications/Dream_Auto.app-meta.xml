@@ -15,5 +15,6 @@
     <setupExperience>all</setupExperience>
     <tabs>Available_Cars</tabs>
     <tabs>Car__c</tabs>
+    <tabs>Settings</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

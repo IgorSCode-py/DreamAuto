@@ -1,0 +1,10 @@
+[
+    {
+        "Car_Type_id__c": 1,
+        "Name": "Luxury"
+    },
+    {
+        "Car_Type_id__c": 2,
+        "Name": "Sports"
+    }
+]
