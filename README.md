@@ -20,9 +20,16 @@ This application incorporates LWC and other features to deliver a user experienc
 
 ## What Features Can You Find in this App?
 
--   LWC
-
--   Message Channels
+- custom objects (car, car type, car review)
+- master-detail and lookup relationship
+- apps, tabs
+- Apex classes, test classes, TestDataFactory
+- serializing into JSON and deserializing
+- lightning pages
+- LWC
+- message channels
+- static resources
+- Package deployment
 
 
 ## Installing DreamAuto using a Scratch Org
