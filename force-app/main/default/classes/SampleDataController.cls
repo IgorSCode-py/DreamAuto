@@ -1,31 +1,128 @@
 public with sharing class SampleDataController {
+    private static Map<Integer,Account> accIds = new Map<Integer,Account>();
+    private static Map<Integer,Car_Type__c> carTypeIds = new Map<Integer,Car_Type__c>();
+
     @AuraEnabled
     public static void importSampleData() {
-        delete [SELECT Id FROM Car__c];
+        List<Car__c> cars = [SELECT Id FROM Car__c];
+        List<Account> accs = [SELECT Id FROM Account WHERE Id in (Select Account__c From Car__c)];
+        
+        delete cars;
+        delete accs;
         delete [SELECT Id FROM Car_Type__c];
-        //delete [SELECT Id FROM Account];
+        
 
         insertAccounts();
         insertCarTypes();
         insertCars();
     }
 
-    private static void insertAccounts() {
+    private static String getJSONStringFromStaticResource(String resourceName) {
         StaticResource accountsResource = [
             SELECT Id, Body
             FROM StaticResource
-            WHERE Name = 'account_data'
+            WHERE Name = :resourceName
         ];
-        String accountsJSON = accountsResource.body.toString();
-        List<Account> accounts = (List<Account>) JSON.deserialize(
-            accountsJSON,
-            List<Account>.class
-        );
-        insert accounts;
+        return accountsResource.body.toString();
     }
 
-    @testVisible
+    private static void insertAccounts() {
+        
+        insertRecords(getJSONStringFromStaticResource('account_data'),'Account');
+    }
+    
     private static void insertCarTypes() {
+
+        insertRecords(getJSONStringFromStaticResource('car_type_data'),'Car_Type__c');
+    }
+
+    private static void insertCars() {
+
+        insertRecords(getJSONStringFromStaticResource('car_data'),'Car__c');
+    }
+    
+    private static void insertRecords(String objectsJSON, String objType) {
+        
+        JSONParser parser = JSON.createParser(objectsJSON);
+		List<SObject> objs;
+        SObject obj;
+        Integer i = 0;
+        while (parser.nextToken() != null) {
+            switch on parser.getCurrentToken() {
+                when START_ARRAY {
+                    if (objType == 'Account') {
+                    	objs = new List<Account>();
+                    }
+                    else if (objType == 'Car_Type__c') {
+                        objs = new List<Car_Type__c>();
+                    }
+                    else {
+                        objs = new List<Car__c>();
+                    }
+                }
+                when START_OBJECT {
+                    if (objType == 'Account') {
+                    	obj = new Account();
+                    }
+                    else if (objType == 'Car_Type__c') {
+                        obj = new Car_Type__c();
+                    }
+                    else {
+                        obj = new Car__c();
+                    }
+                	i++;
+                }
+                when END_OBJECT {
+                    objs.add(obj);
+                }
+                when FIELD_NAME {
+                    String fieldName = parser.getText();
+                    switch on fieldName {
+                    	when 'Number' {
+                        	parser.nextToken();
+                        	Integer objNum = Integer.valueOf(parser.getText());
+                            if (objType == 'Account') {
+                        		accIds.put(objNum, (Account)obj);
+                            }
+                            else {
+                                carTypeIds.put(objNum, (Car_Type__c)obj);
+                            }
+                        	//System.debug('Number');
+                        	//System.debug(objNum);
+                    	}
+                        when 'Name', 'Picture__c', 'Description__c' {
+                        	parser.nextToken();
+	                       	obj.put(fieldName,parser.getText());
+                       	}
+                        when 'Price__c', 'Geolocation__Latitude__s', 'Geolocation__Longitude__s' {//
+                        	parser.nextToken();
+	                       	obj.put(fieldName,parser.getDecimalValue());
+                       	}
+                        when 'Account__c' {
+                            parser.nextToken();
+	                       	obj.put(fieldName,accIds.get(parser.getIntegerValue()).get('Id'));
+                    	}
+                        when 'Car_Type__c' {
+                            parser.nextToken();
+	                       	obj.put(fieldName,carTypeIds.get(parser.getIntegerValue()).get('Id'));
+                    	}
+                	}
+                }
+            }
+            
+
+
+        }
+
+        insert objs;
+    }
+
+
+ 
+
+
+    @testVisible
+    private static void insertCarTypes2() {
         StaticResource carTypesResource = [
             SELECT Id, Body
             FROM StaticResource
@@ -39,7 +136,7 @@ public with sharing class SampleDataController {
         insert carTypes;
     }
 
-    private static void insertCars() {
+    private static void insertCars2() {
         StaticResource carsResource = [
             SELECT Id, Body
             FROM StaticResource
