@@ -2,7 +2,7 @@ public with sharing class CarDataService {
 
     @AuraEnabled(cacheable=true)
     public static List<Car_Type__c> getCarTypes() {
-        List<Car_Types> carTypes;
+        List<Car_Type__c> carTypes;
         try {
             carTypes = [SELECT Name, Id FROM Car_Type__c WITH SECURITY_ENFORCED ORDER BY Name];
         }
