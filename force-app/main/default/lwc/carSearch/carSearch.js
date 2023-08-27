@@ -17,7 +17,8 @@ export default class CarSearch extends LightningElement {
     // This custom event comes from the form
     searchCars(event) { 
         const carTypeId = event.detail.carTypeId;
-        this.template.querySelector("c-car-search-result").searchCars(carTypeId);
+        //this.template.querySelector("c-car-search-result").searchCars(carTypeId);
+        this.refs.carSearchResult.searchCars(carTypeId);
     }
     
 }

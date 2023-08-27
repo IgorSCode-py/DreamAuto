@@ -10,7 +10,7 @@ import CarMC from '@salesforce/messageChannel/CarMessageChannel__c';
 export default class CarSearchResult extends LightningElement {
     selectedCarId;
 
-    @api
+    //@api
     carTypeId = '';
 
     cars;
@@ -39,12 +39,11 @@ export default class CarSearchResult extends LightningElement {
     
     @api
     async refresh() {
-     /* this.isLoading = true;
+      this.isLoading = true;
       this.notifyLoading(this.isLoading);
       await refreshApex(this.cars);
       this.isLoading = false;
       this.notifyLoading(this.isLoading);
-      */
     }
     
     updateSelectedTile(event) {

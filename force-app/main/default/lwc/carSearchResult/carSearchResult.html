@@ -1,7 +1,7 @@
 <template>
     <lightning-tabset variant="scoped">
       <lightning-tab label="Gallery">
-        <template if:true={cars}>
+        <template lwc:if={cars}>
           <div class="slds-scrollable_y">
             <lightning-layout horizontal-align="center" multiple-rows>
               <!--  looping through each car -->
