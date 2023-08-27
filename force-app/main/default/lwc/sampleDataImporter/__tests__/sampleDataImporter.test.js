@@ -3,6 +3,7 @@ import SampleDataImporter from 'c/sampleDataImporter';
 import { ShowToastEventName } from 'lightning/platformShowToastEvent';
 import importSampleData from '@salesforce/apex/SampleDataController.importSampleData';
 
+
 // Mocking imperative Apex method call
 jest.mock(
     '@salesforce/apex/SampleDataController.importSampleData',
