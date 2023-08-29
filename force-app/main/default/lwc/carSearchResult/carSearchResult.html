@@ -6,14 +6,10 @@
             <lightning-layout horizontal-align="center" multiple-rows>
               <!--  looping through each car -->
               <template for:each={cars} for:item="car">
-                <lightning-layout-item key={car.Id} 
-                                      padding="around-small" 
-                                      size="12" 
-                                      small-device-size="6"
-                                      medium-device-size="4"
-                                      large-device-size="3">
+                <lightning-layout-item key={car.Id} padding="around-small" size="12" 
+                      small-device-size="6" medium-device-size="4" large-device-size="3">
                    <!-- car tile --> 
-                  <c-car-tile car={car} selected-car-id={selectedCarId} oncarselect={updateSelectedTile}></c-car-tile>
+                  <c-car-tile car={car} selected-car-id={selectedCarId} onselected={updateSelectedTile}></c-car-tile>
                 </lightning-layout-item>
               </template>
             </lightning-layout>

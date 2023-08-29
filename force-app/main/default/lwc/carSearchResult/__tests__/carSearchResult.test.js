@@ -1,11 +1,10 @@
 import { createElement } from 'lwc';
 import CarSearchResult from 'c/carSearchResult';
 import getCars from '@salesforce/apex/CarDataService.getCars';
-// Realistic data with a list of cars
-//const mockGetCarsList = require('./data/getCarsList.json');
-// An empty list of records to verify the component does something reasonable
-// when there is no data to display
-//const mockGetCarsListNoRecords = require('./data/getCarsListNoRecords.json');
+import { publish, MessageContext } from 'lightning/messageService';
+import CarMC from '@salesforce/messageChannel/CarMessageChannel__c';
+import { refreshApex } from '@salesforce/apex';
+
 const ACCOUNT = {
     "Id":'123456',
     "Name":'Luxury'
@@ -78,7 +77,6 @@ describe('c-car-search-result', () => {
             });
 
             // Act
-            //element.cars = MOCK_CARS;
             document.body.appendChild(element);
             
             // Emit data from @wire
@@ -90,6 +88,28 @@ describe('c-car-search-result', () => {
             const carTileEls = element.shadowRoot.querySelectorAll('c-car-tile');
             expect(carTileEls.length).toBe(MOCK_CARS.length);
             expect(carTileEls[0].car.Name).toBe(MOCK_CARS[0].Name);
+            //expect(refreshApex).toHaveBeenCalled();
+        });
+        it('sends updateSelectedTile event when c-car-tile selected', async () => {
+            const element = createElement('c-car-search-result', {
+                is: CarSearchResult
+            });
+            // Act
+            document.body.appendChild(element);
+            
+            // Emit data from @wire
+            getCars.emit(MOCK_CARS);
+
+            // Wait for any asynchronous DOM updates
+            await flushPromises();
+    
+            const carTile = element.shadowRoot.querySelector('c-car-tile');
+            carTile.dispatchEvent(new CustomEvent('selected', {
+                detail: MOCK_CARS[0]
+                }));
+            expect(publish).toHaveBeenCalledWith(undefined, CarMC, {
+                recordId: undefined
+            });
         });
     });
 });
