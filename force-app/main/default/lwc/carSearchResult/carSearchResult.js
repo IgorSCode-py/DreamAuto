@@ -1,10 +1,7 @@
 import { LightningElement, wire, api } from 'lwc';
 import getCars from '@salesforce/apex/CarDataService.getCars';
 import { refreshApex } from '@salesforce/apex';
-import {
-  publish,
-  MessageContext
-} from 'lightning/messageService';
+import { publish, MessageContext } from 'lightning/messageService';
 import CarMC from '@salesforce/messageChannel/CarMessageChannel__c';
 
 export default class CarSearchResult extends LightningElement {
