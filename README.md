@@ -26,7 +26,7 @@ This application incorporates LWC and other features to deliver a user experienc
 - Apex classes, test classes, TestDataFactory
 - serializing into JSON and deserializing
 - lightning pages
-- LWC
+- LWC, JEST tests
 - message channels
 - static resources
 - Package deployment
@@ -97,7 +97,7 @@ Make sure to start from a brand-new environment to avoid conflicts with previous
 
 1. Log in to your org
 
-1. Click [this link](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q0000009vyeQAA) to install the DreamAuto unlocked package in your org.
+1. Click [this link](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t7Q0000009wAaQAI) to install the DreamAuto unlocked package in your org.
 
 1. Select **Install for All Users**
 
