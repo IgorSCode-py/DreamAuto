@@ -1,0 +1,11 @@
+[{
+    "Name" : "TTTTToyotaT Land Cruiser",
+    "Picture__c" : "https://avatars.mds.yandex.net/i?id=26a3b6fb262caa171c030d2c7d36750fc8e884ff-8208008-images-thumbs&n=13",
+    "Price__c" : 100.00,
+    "Description__c" : "Big off-road car",
+    "Geolocation__Latitude__s" : 41.7885950,
+    "Geolocation__Longitude__s" : 44.8171920,
+    "ExternalCarId__c" : "12345123451234",
+    "Account__c" : "0015t00001A12bJAAR",
+    "Car_Type__c" : "a015t00000QS1RxAAL"
+}]

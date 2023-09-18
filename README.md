@@ -30,7 +30,7 @@ This application incorporates LWC and other features to deliver a user experienc
 - message channels
 - static resources
 - Package deployment
-
+- Apex class exposed as REST API endpoint (GET,POST,DELETE,PUT methods are available)
 
 ## Installing DreamAuto using a Scratch Org
 
