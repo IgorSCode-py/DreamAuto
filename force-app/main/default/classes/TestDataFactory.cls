@@ -1,6 +1,6 @@
 @isTest
 public class TestDataFactory {
-	public static List<Car__c> createCarsWithTypesAndAccounts(Integer numItems) {
+    private static List<Car__c> createCars(Integer numItems) {
         List<Account> accounts = new List<Account>();
         for(Integer i=0;i<numItems;i++) {
         	Account newAccount = new Account();
@@ -24,7 +24,25 @@ public class TestDataFactory {
             newCar.Account__c = accounts[i].id;
             newCar.Car_Type__c = types[i].id;
             cars.add(newCar);
-        }        
+        }
+        return cars;
+    }
+
+    public static List<Car__c> createCarsWithTypesAndAccounts(Integer numItems, Boolean doInsert) {
+        
+        List<Car__c> cars = createCars(numItems);
+        
+        if (doInsert) {        
+		    insert cars;
+        }
+        
+        return cars;
+    }
+
+	public static List<Car__c> createCarsWithTypesAndAccounts(Integer numItems) {
+
+        List<Car__c> cars = createCars(numItems);
+        
 		insert cars;
         
         return cars;
