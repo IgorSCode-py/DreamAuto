@@ -171,5 +171,4 @@ This is a part of Igor Shlepanov's portfolio.
 
 You can find me here:
 
-- [LinkedIn](https://www.linkedin.com/in/igor-shlepanov-b22a8863/)
 - [Trailblaizer](https://trailblazer.me/id/ishlepanov)
